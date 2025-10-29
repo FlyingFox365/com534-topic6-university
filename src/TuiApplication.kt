@@ -43,7 +43,7 @@ class TuiApplication : MenuItemHandler {
 
 
         // Array of handlers for each menu item.
-        val menuHandlers = arrayOf (this, this, this)
+        val menuHandlers = arrayOf<MenuItemHandler> (this, this, this)
 
         var running = true
         while (running) {
@@ -51,7 +51,7 @@ class TuiApplication : MenuItemHandler {
             // parameter of the lambda.
             println("0: Add Student")
             println("1: Search for Student By ID")
-            println("2: Search for Students By name")
+            println("2: Search for Students By course")
             println("3: Quit")
 
             // Read the user input
