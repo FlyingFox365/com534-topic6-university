@@ -66,9 +66,11 @@ class TuiApplication : MenuItemHandler {
         }
     }
 
-    // TODO complete.
     override fun onMenuItemSelected(choice: Int) {
-        println("Choice $choice selected.")
-
+        when (choice) {
+            0 -> addStudent()
+            1 -> searchForStudentById()
+            2 -> searchForStudentsByCourse()
+        }
     }
 }
