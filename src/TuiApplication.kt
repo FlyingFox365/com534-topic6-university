@@ -1,49 +1,47 @@
 // TuiApplication
 // An application class, to handle console input/output.
 // A TuiApplication object is created in main(), and its run() method called to enter the main loop of the application.
-class TuiApplication : MenuItemHandler {
+class TuiApplication {
     val university = University()
-
-    fun addStudent() {
-        println("Enter name:")
-        val name = readln()
-        println("Enter course:")
-        val course = readln()
-        println("Enter id:")
-        val id = readln()
-        university.addStudent(Student(id, name, course))
-    }
-
-    fun searchForStudentById() {
-        println("Enter ID:")
-        val id = readln()
-        val student = university.findStudentById(id)
-        if (student == null) {
-            println("No student found")
-        } else {
-            println(student)
-        }
-    }
-
-    fun searchForStudentsByCourse() {
-        println("Enter course:")
-        val course = readln()
-        val students = university.findStudentsByCourse(course)
-        if (students.isEmpty()) {
-            println("No matching students")
-        } else {
-            for (s in students) {
-                println(s)
-            }
-        }
-    }
 
     fun run() {
 
+        val addStudentHandler = MenuItemHandler {
+            println("Enter name:")
+            val name = readln()
+            println("Enter course:")
+            val course = readln()
+            println("Enter id:")
+            val id = readln()
+            university.addStudent(Student(id, name, course))
+        }
 
+        val searchByIDHandler = MenuItemHandler {
+            println("Enter ID:")
+            val id = readln()
+            val student = university.findStudentById(id)
+            if (student == null) {
+                println("No student found")
+            } else {
+                println(student)
+            }
+        }
+
+        val searchByCourseHandler = MenuItemHandler {
+            println("Enter course:")
+            val course = readln()
+            val students = university.findStudentsByCourse(course)
+            if (students.isEmpty()) {
+                println("No matching students")
+            } else {
+                for (s in students) {
+                    println(s)
+                }
+            }
+        }
 
         // Array of handlers for each menu item.
-        val menuHandlers = arrayOf<MenuItemHandler> (this, this, this)
+        val menuHandlers = arrayOf<MenuItemHandler> (addStudentHandler, searchByIDHandler, searchByCourseHandler)
 
         var running = true
         while (running) {
@@ -63,14 +61,6 @@ class TuiApplication : MenuItemHandler {
                 3 -> running = false
                 else -> println("Error: invalid option")
             }
-        }
-    }
-
-    override fun onMenuItemSelected(choice: Int) {
-        when (choice) {
-            0 -> addStudent()
-            1 -> searchForStudentById()
-            2 -> searchForStudentsByCourse()
         }
     }
 }
